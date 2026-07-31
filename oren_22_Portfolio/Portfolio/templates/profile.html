@@ -1,0 +1,183 @@
+{% extends 'master/base.html' %}
+
+{% block content %}
+
+<style>
+    .profile-container{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        padding:50px 20px;
+    }
+
+    .profile-card{
+        width:100%;
+        max-width:700px;
+        background:#fff;
+        border-radius:12px;
+        box-shadow:0 10px 30px rgba(0,0,0,.1);
+        overflow:hidden;
+    }
+
+    .profile-header{
+        background:linear-gradient(135deg,#0d6efd,#4f8dfd);
+        color:#fff;
+        text-align:center;
+        padding:30px;
+    }
+
+    .profile-avatar{
+        width:90px;
+        height:90px;
+        border-radius:50%;
+        background:#fff;
+        color:#0d6efd;
+        font-size:35px;
+        font-weight:bold;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        margin:0 auto 15px;
+    }
+
+    .profile-header h2{
+        margin:0;
+    }
+
+    .profile-body{
+        padding:30px;
+    }
+
+    .detail-row{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        padding:15px 0;
+        border-bottom:1px solid #eee;
+    }
+
+    .detail-label{
+        font-weight:600;
+        color:#555;
+    }
+
+    .detail-value{
+        color:#222;
+        text-align:right;
+    }
+
+    .detail-value a{
+        color:#0d6efd;
+        text-decoration:none;
+    }
+
+    .detail-value a:hover{
+        text-decoration:underline;
+    }
+
+    .profile-footer{
+        display:flex;
+        justify-content:center;
+        gap:15px;
+        padding:25px;
+        background:#f8f9fa;
+    }
+
+    .btn{
+        padding:10px 22px;
+        border-radius:6px;
+        text-decoration:none;
+        color:#fff;
+        transition:.3s;
+    }
+
+    .btn-info{
+        background:#0dcaf0;
+    }
+
+    .btn-info:hover{
+        background:#0aa7c5;
+    }
+
+    .btn-dark{
+        background:#212529;
+    }
+
+    .btn-dark:hover{
+        background:#000;
+    }
+
+    @media(max-width:576px){
+
+        .detail-row{
+            flex-direction:column;
+            align-items:flex-start;
+            gap:6px;
+        }
+
+        .detail-value{
+            text-align:left;
+        }
+    }
+</style>
+
+<div class="profile-container">
+
+    <div class="profile-card">
+
+        <div class="profile-header">
+
+            <div class="profile-avatar">
+                {{ request.user.full_name }}
+            </div>
+
+            <h2>{{ request.user.full_name }}</h2>
+            <p>{{ request.user.email }}</p>
+
+        </div>
+
+        <div class="profile-body">
+
+            <div class="detail-row">
+                <div class="detail-label">👤 Full Name</div>
+                <div class="detail-value">{{ request.user.full_name }}</div>
+            </div>
+
+            <div class="detail-row">
+                <div class="detail-label">📧 Email</div>
+                <div class="detail-value">{{ request.user.email }}</div>
+            </div>
+
+            <div class="detail-row">
+                <div class="detail-label">🏠 Address</div>
+                <div class="detail-value">{{ request.user.address }}</div>
+            </div>
+
+            <div class="detail-row">
+                <div class="detail-label">🌐 Social Link</div>
+                <div class="detail-value">
+                    <a href="{{ request.user.social_link }}" target="_blank">
+                        Visit Profile
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="profile-footer">
+
+            <a href="{% url 'update_profile' %}" class="btn btn-info">
+                ✏ Update Profile
+            </a>
+
+            <a href="javascript:history.back()" class="btn btn-dark">
+                ← Back
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

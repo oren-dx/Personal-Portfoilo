@@ -1,0 +1,255 @@
+{% extends 'master/base.html' %}
+
+{% block content %}
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.resume{
+    max-width:1000px;
+    margin:40px auto;
+    background:#fff;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.header{
+    background:#1f2937;
+    color:#fff;
+    padding:40px;
+    display:flex;
+    align-items:center;
+    gap:30px;
+}
+
+.profile-img{
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    border:5px solid #fff;
+    object-fit:cover;
+    background:#dcdcdc;
+}
+
+.header-info h1{
+    font-size:36px;
+    margin-bottom:10px;
+}
+
+.header-info p{
+    margin:6px 0;
+    color:#ddd;
+}
+
+.header-info a{
+    color:#7dd3fc;
+    text-decoration:none;
+}
+
+.body{
+    padding:35px;
+}
+
+.section{
+    margin-bottom:35px;
+}
+
+.section h2{
+    font-size:24px;
+    color:#1f2937;
+    border-left:5px solid #2563eb;
+    padding-left:12px;
+    margin-bottom:20px;
+}
+
+.skills{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.skill{
+    background:#2563eb;
+    color:#fff;
+    padding:8px 18px;
+    border-radius:30px;
+    font-size:14px;
+}
+
+.experience{
+    border-left:3px solid #2563eb;
+    padding-left:25px;
+    margin-bottom:25px;
+    position:relative;
+}
+
+.experience::before{
+    content:"";
+    width:14px;
+    height:14px;
+    background:#2563eb;
+    border-radius:50%;
+    position:absolute;
+    left:-9px;
+    top:5px;
+}
+
+.experience h3{
+    color:#111827;
+    margin-bottom:5px;
+}
+
+.experience small{
+    color:#6b7280;
+    display:block;
+    margin-bottom:10px;
+}
+
+.experience p{
+    color:#444;
+    line-height:1.7;
+}
+
+.project{
+    display:flex;
+    gap:20px;
+    background:#f9fafb;
+    padding:18px;
+    border-radius:8px;
+    margin-bottom:18px;
+    border:1px solid #e5e7eb;
+}
+
+.project img{
+    width:120px;
+    height:80px;
+    object-fit:cover;
+    border-radius:6px;
+    background:#ddd;
+}
+
+.project-content strong{
+    display:block;
+    font-size:18px;
+    margin-bottom:10px;
+    color:#1f2937;
+}
+
+.project-content p{
+    color:#555;
+    line-height:1.6;
+}
+
+@media(max-width:768px){
+
+.header{
+    flex-direction:column;
+    text-align:center;
+}
+
+.project{
+    flex-direction:column;
+}
+
+.project img{
+    width:100%;
+    height:180px;
+}
+
+}
+</style>
+
+<div class="resume">
+
+    <div class="header">
+
+        <img src="" alt="Profile" class="profile-img">
+
+        <div class="header-info">
+            <h1>{{ user.full_name }}</h1>
+            <p>📍 {{ user.address }}</p>
+            <p>📧 {{ user.email }}</p>
+            <p>
+                🌐
+                <a href="{{ user.social_link }}" target="_blank">
+                    {{ user.social_link }}
+                </a>
+            </p>
+        </div>
+
+    </div>
+
+    <div class="body">
+
+        <!-- Skills -->
+        <div class="section">
+
+            <h2>Skills</h2>
+
+            <div class="skills">
+
+                {% for skill in skills %}
+                <span class="skill">{{ skill.name }}</span>
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+        <!-- Experience -->
+        <div class="section">
+
+            <h2>Experience</h2>
+
+            {% for exp in experience %}
+
+            <div class="experience">
+
+                <h3>{{ exp.designation }} | {{ exp.company }}</h3>
+
+                <small>{{ exp.duration }}</small>
+
+                <p>{{ exp.description }}</p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <!-- Projects -->
+        <div class="section">
+
+            <h2>Projects</h2>
+
+            {% for project in projects %}
+
+            <div class="project">
+
+                <img src="" alt="Project">
+
+                <div class="project-content">
+
+                    <strong>{{ project.title }}</strong>
+
+                    <p>{{ project.description|truncatewords:25 }}</p>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

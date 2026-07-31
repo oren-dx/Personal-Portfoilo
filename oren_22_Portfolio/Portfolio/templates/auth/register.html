@@ -1,0 +1,46 @@
+{% extends 'master/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<html>
+<body>
+
+<div class="container">
+
+    
+
+        <h2>Create Account</h2>
+        <p>Register to your Portfolio</p>
+
+        {% include 'master/messages.html' %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            {{user_form| crispy}}
+
+            <div class="input-group">
+                
+        
+            </div>
+
+            <button type="submit" class="btn btn-primary">Register</button>
+
+            <div class="login">
+                Already have an account?
+                <a href="{% url 'login_page' %}" class="btn btn-success">Login</a>
+        </form>
+
+        </div>
+
+  
+
+</div>
+
+</body>
+</html>
+    
+{% endblock content %}
+    
